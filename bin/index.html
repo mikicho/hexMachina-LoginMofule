@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8"/>
+		<title>hexMachina Login Module</title>
+	</head>
+	<body>
+		<div id="js-google-login">Google Login</div>
+		<div id="js-facebook-login">Facebook Login</div>
+		<div id="js-disconnect">Disconnect</div>
+		<div id="js-sign-in"></div>
+		<div id="js-error"></div>
+		<!-- SDK's should add by the module/service -->
+		<script src="https://apis.google.com/js/api:client.js"></script>
+		<script>
+			window.fbAsyncInit = function() {
+				FB.init({
+				appId      : '1377339612313719',
+				cookie     : true,
+				xfbml      : true,
+				version    : 'v2.8'
+				});
+				FB.AppEvents.logPageView();   
+			};
+
+			(function(d, s, id){
+				var js, fjs = d.getElementsByTagName(s)[0];
+				if (d.getElementById(id)) {return;}
+				js = d.createElement(s); js.id = id;
+				js.src = "//connect.facebook.net/en_US/sdk.js";
+				fjs.parentNode.insertBefore(js, fjs);
+			}(document, 'script', 'facebook-jssdk'));
+		</script>
+		<script src="js/main.js"></script>
+	</body>
+</html>
+

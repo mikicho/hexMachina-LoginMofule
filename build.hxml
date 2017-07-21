@@ -1,0 +1,9 @@
+-cp src
+# -D analyzer-optimize
+-main Main
+-js ./bin/js/main.js
+
+-lib hexMachina
+-lib GoogleApiJs
+
+-debug
