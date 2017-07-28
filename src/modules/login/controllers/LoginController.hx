@@ -7,7 +7,6 @@ class LoginController implements ILoginController {
 	public var service:ILoginService;
 
     public function login():Void {
-        trace("call to service");
         this.service.call();
     }
 }

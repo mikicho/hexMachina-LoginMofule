@@ -16,6 +16,7 @@ class LoginModel implements ILoginModel
 	public function setUsername(name:String):Void 
 	{
 		this._username = name;
+		trace(this.trigger);
 		this.trigger.setUsername(this._username);
 	}
 	

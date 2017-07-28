@@ -1,11 +1,9 @@
 package modules.login.services;
 
-import hex.service.stateless.IAsyncStatelessService;
+import hex.service.stateless.IStatelessService;
+import common.ILoginRequestedConnection;
 
-/**
- * @author Andrei Bunulu
- */
-interface ILoginService extends IAsyncStatelessService {
+interface ILoginService extends IStatelessService extends ILoginRequestedConnection {
     //TODO: change the returned type
     function getUserData():String;
 }

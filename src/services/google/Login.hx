@@ -1,18 +1,22 @@
 package services.google;
 
 import modules.login.services.ILoginService;
-import hex.service.stateless.AsyncStatelessService ;
+import hex.service.stateless.StatelessService;
 import hex.service.ServiceConfiguration;
 import hex.log.HexLog.*;
 import google.api.GoogleAPI;
 import google.api.auth2.*;
+import modules.login.model.ILoginModel;
 
 /**
  * ...
  * @author Andrei Bunulu
  */
-class Login extends AsyncStatelessService implements ILoginService
+class Login extends StatelessService implements ILoginService
 {
+	@Inject
+	public var model:ILoginModel;
+
 	public function new() 
 	{
 		super();
@@ -30,8 +34,9 @@ class Login extends AsyncStatelessService implements ILoginService
 				client_id: "336663289135-huvf4gfmgj7sqf6knb1i13iuam5le8fq.apps.googleusercontent.com"
 			});
 
-			googleAuth.signIn().then(function(googleUser){
+			googleAuth.signIn().then(function(googleUser) {
 				this._onResultHandler(googleUser);
+				model.setUsername(this._result);
 			});
 		});	
 	}
@@ -42,7 +47,7 @@ class Login extends AsyncStatelessService implements ILoginService
 		#if debug
 		debug("Google Login createConfiguration");
 		#end
-		
+
 		// TODO: service have to setConfiguration?
 		this.setConfiguration(new ServiceConfiguration());
 		this.setParser(new LoginParser());
@@ -51,5 +56,11 @@ class Login extends AsyncStatelessService implements ILoginService
 	public function getUserData():String 
 	{
 		return this._result;
+	}
+
+	public function onLoginRequested():Void
+	{
+		trace("call to service");
+		this.call();
 	}
 }

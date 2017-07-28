@@ -28,6 +28,6 @@ class LoginModule extends ContextModule implements ILoginModule
 	{
 		trace("_onInitialisation");
 		this._get(ILoginModel).trigger.connect(this._get(ILoginView));
-		this._get(ILoginController).login();
+		this._get(ILoginView).trigger.connect(this._get(ILoginService));
 	}
 }

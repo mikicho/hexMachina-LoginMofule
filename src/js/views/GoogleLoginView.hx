@@ -2,25 +2,25 @@ package js.views;
 
 import modules.login.view.ILoginView;
 import js.html.Element;
-import modules.login.LoginModule;
-import modules.login.services.ILoginService;
+import hex.event.ITrigger;
+import common.ILoginRequestedConnection;
 
 class GoogleLoginView implements ILoginView 
 {
+	public var trigger( default, never ):ITrigger<ILoginRequestedConnection>;
 	public var _layout:Element;
 
-	public function new( layout : Element, service:ILoginService ) 
+	public function new( layout : Element) 
 	{
 		this._layout = layout;
         this._layout.onclick = function () {
-			trace("Login");
-			new LoginModule({fromType:"modules.login.view.ILoginView", toValue:this, injectInto:true}, 
-						    {fromType:"modules.login.services.ILoginService", toValue:service, injectInto:true}).initialize();
+			this.trigger.onLoginRequested();
 		};
 	}
 		
 	public function setUsername(name:String):Void
 	{
+		trace("view");
 		js.Browser.document.getElementById("js-sign-in").textContent = name + " signed in with Google";
         //js.Browser.document.getElementById("js-disconnect").onclick = googleAuth.disconnect;
 	}
